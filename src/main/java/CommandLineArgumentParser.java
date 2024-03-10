@@ -76,6 +76,8 @@ public class CommandLineArgumentParser {
         String[] plugins = argumentParser.getPlugins();
         String[] recipes = argumentParser.getRecipes();
         boolean isDryRun = argumentParser.isDryRun();
+        String iat = System.getenv("IAT");
+        String GH_username = System.getenv("GITHUB_USERNAME");
 
         // Do something with the parsed values
         System.out.println("Plugins: " + String.join(", ", plugins));
@@ -83,5 +85,7 @@ public class CommandLineArgumentParser {
         if (recipes != null) {
             System.out.println("Recipes: " + String.join(", ", recipes));
         }
+        System.out.println(iat);
+        System.out.println(GH_username);
     }
 }
