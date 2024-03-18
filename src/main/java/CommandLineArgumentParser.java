@@ -11,8 +11,7 @@ public class CommandLineArgumentParser {
 
     private void parseCommandLine(String[] args) {
         Options options = new Options();
-
-        // Define the command line options
+        
         Option pluginsOption = Option.builder()
                 .longOpt("plugins")
                 .desc("Specify plugins")
@@ -40,10 +39,10 @@ public class CommandLineArgumentParser {
         CommandLineParser parser = new DefaultParser();
 
         try {
-            // Parse the command line arguments
+            
             CommandLine cmd = parser.parse(options, args);
 
-            // Retrieve the values of the options
+            
             String pluginArg = cmd.getOptionValue("plugins");
             plugins = pluginArg.split(",");
 
@@ -51,7 +50,7 @@ public class CommandLineArgumentParser {
             isDryRun = cmd.hasOption("dry-run");
 
         } catch (ParseException e) {
-            // In case of parsing exception, print the help message
+            
             HelpFormatter formatter = new HelpFormatter();
             formatter.printHelp("java -jar plugin-modernizer.jar", options);
         }
@@ -72,14 +71,12 @@ public class CommandLineArgumentParser {
     public static void main(String[] args) {
         CommandLineArgumentParser argumentParser = new CommandLineArgumentParser(args);
 
-        // Now you can access the parsed values using getter methods
         String[] plugins = argumentParser.getPlugins();
         String[] recipes = argumentParser.getRecipes();
         boolean isDryRun = argumentParser.isDryRun();
         String iat = System.getenv("IAT");
         String GH_username = System.getenv("GITHUB_USERNAME");
 
-        // Do something with the parsed values
         System.out.println("Plugins: " + String.join(", ", plugins));
         System.out.println("Dry run mode: " + isDryRun);
         if (recipes != null) {
